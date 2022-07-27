@@ -1,0 +1,36 @@
+﻿@model SoftwareLicenseAgreement
+@{
+    ViewData["Title"] = "CustomValidators";
+}
+
+<h1>Custom validation attributes</h1>
+<hr />
+<h2>License Agreement for @Model.SoftwareProductName</h2>
+<p>
+    @Model.AgreementText
+</p>
+<form asp-action="CustomValidators">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="SoftwareProductName"></label>
+        <input asp-for="SoftwareProductName" class="form-control" />
+        <span asp-validation-for="SoftwareProductName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LicenseeName"></label>
+        <input asp-for="LicenseeName" class="form-control" />
+        <span asp-validation-for="LicenseeName" class="text-danger"></span>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input asp-for="AgreementAccepted" />Tick the box to accept the agreement
+            <span asp-validation-for="AgreementAccepted" class="text-danger"></span>
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/custom-validators.js"></script>
+}
